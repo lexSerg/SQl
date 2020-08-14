@@ -110,17 +110,9 @@ delete  from application where CreditState = 'returned';
 
 #
 # 20. Видалити кредити клієнтів, в яких друга літера прізвища є голосною.
-
-
-select idClient from client c
-    join application a on c.idClient = a.Client_idClient
-    where regexp_like(c.LastName, '^.(e|u|i|o|a])') group by LastName;
-
-# !!!Не работает
-delete  from application where Client_idClient in (select idClient from client c
-    join application a on c.idClient = a.Client_idClient
-    where regexp_like(c.LastName, '^.(e|u|i|o|a])') group by LastName);
-
+delete a from application a
+    join client c on a.Client_idClient = c.idClient
+    where regexp_like(c.LastName, '^.(e|u|i|o|a|a])');
 
 #
 # Знайти львівські відділення, які видали кредитів на загальну суму більше ніж 5000
