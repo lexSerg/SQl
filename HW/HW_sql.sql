@@ -29,8 +29,8 @@ select count(idClient) ClientCount, DepartmentCity from client c
 select count(idClient) ClientCount, DepartmentCity Department from client c
     join department d on c.Department_idDepartment = d.idDepartment
       where DepartmentCity like 'Lviv';
-#
-#
+
+# %ov% - ищет внутри ov
 # 10. Знайти кредити, які мають найбільшу суму для кожного клієнта окремо.
 select  max(Sum), idClient, FirstName, LastName from client c
     join application a on c.idClient = a.Client_idClient
@@ -113,7 +113,7 @@ delete  from application where CreditState = 'returned';
 delete a from application a
     join client c on a.Client_idClient = c.idClient
     where regexp_like(c.LastName, '^.(e|u|i|o|a|a])');
-
+    
 #
 # Знайти львівські відділення, які видали кредитів на загальну суму більше ніж 5000
 select * from (select Department_idDepartment, DepartmentCity, sum(Sum) maxSum from application a
